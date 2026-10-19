@@ -38,7 +38,6 @@ public class AttendEaseApp extends JFrame {
         setMinimumSize(new Dimension(900, 620));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        loadDemoData();
         setLayout(cardLayout);
         add(buildLoginPage(), "login");
         add(buildAdministratorDashboard(), "admin");
@@ -85,7 +84,7 @@ public class AttendEaseApp extends JFrame {
         layout.insets = new Insets(10, 0, 0, 0);
         JButton signInButton = primaryButton("Sign in");
         loginPanel.add(signInButton, layout);
-        JLabel credentials = new JLabel("Demo: admin / admin123  |  renier / 1234");
+        JLabel credentials = new JLabel("Demo: admin / admin123");
         credentials.setForeground(MUTED);
         credentials.setFont(new Font("SansSerif", Font.PLAIN, 12));
         layout.gridy++;
@@ -547,19 +546,6 @@ public class AttendEaseApp extends JFrame {
     private void signOut() {
         activeStudent = null;
         cardLayout.show(getContentPane(), "login");
-    }
-
-    private void loadDemoData() {
-        Student demoStudent1 = new Student("S-001", "Renier Languido", "renier", "1234",
-                "2026-1001", "BSIT", "3rd Year", "09123456789");
-        Student demoStudent2 = new Student("S-002", "Mark Melencion", "mark", "1234",
-                "2026-1002", "BSIT", "3rd Year", "09123456780");
-        studentSearch.addStudent(demoStudent1);
-        studentSearch.addStudent(demoStudent2);
-        LocalDate today = LocalDate.now();
-        attendanceService.recordAttendance(demoStudent1, classRecord, today.minusDays(2).toString(), "Present", "On time");
-        attendanceService.recordAttendance(demoStudent1, classRecord, today.minusDays(1).toString(), "Late", "Traffic");
-        attendanceService.recordAttendance(demoStudent2, classRecord, today.minusDays(2).toString(), "Absent", "No excuse");
     }
 
     private Student findStudentByNumber(String studentNumber) {
